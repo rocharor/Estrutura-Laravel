@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         //desativa as chaves estrangeiras
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-        $this->call(UserTableSeeder::class);
+//        $this->call(UserTableSeeder::class);
         $this->call(AclTableSeeder::class);
 
 	//ativa as chaves estrangeiras

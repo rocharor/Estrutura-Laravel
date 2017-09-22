@@ -22,6 +22,7 @@
         <!-- jQuery, Notify, Global-->
         <script src="/node_modules/jquery/dist/jquery.min.js"></script>
         <script src="/node_modules/bootstrap-notify/bootstrap-notify.min.js"></script>
+        <script src="/js/global.js"></script>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         @if (session('sucesso')) <script>alertaPagina('{{ session('sucesso') }}', 'success');</script> @endif
