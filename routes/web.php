@@ -11,7 +11,7 @@ Route::group(['as' => 'site.'], function () {
 /********************
 | Rotas da área Admin
 *********************/
-Route::group(['prefix' => 'admin', 'as' => 'admin.'/*, 'middleware' => ['auth','can:pg-admin']*/ ], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth'/*,'can:pg-admin'*/] ], function () {
     ### Links ###
     Route::get('',['as'=>'home','uses'=>'Admin\DashboardController@index']);
 
@@ -57,3 +57,11 @@ Auth::routes();
 Route::get('/login',['as'=>'login','uses'=>'Auth\LoginController@showLoginForm']);
 Route::get('/logout',['as'=>'logout','uses'=>'Auth\LoginController@logout']);
 Route::get('/cadastre-se',['as'=>'cadastre-se','uses'=>'Auth\RegisterController@showRegistrationForm']);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
