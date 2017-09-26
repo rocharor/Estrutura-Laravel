@@ -7,7 +7,6 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
         <!-- Bootstrap -->
         <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
         <!-- Theme style -->
@@ -27,6 +26,7 @@
 
         <script src="/node_modules/jquery/dist/jquery.min.js"></script>
         <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
         <script src="/AdminLTE/plugins/iCheck/icheck.min.js"></script>
         <script>
             $(function () {
@@ -37,5 +37,5 @@
                 });
             });
         </script>
-    </body>    
+    </body>
 </html>

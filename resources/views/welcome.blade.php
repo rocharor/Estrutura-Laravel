@@ -9,12 +9,12 @@
     </head>
     <body>
         <a href="{{ Route('admin.home') }}">Admin</a>
-        
+
         @can('AdmMaster')
             <p>Administrador master</p>
         @endcan
 
-        @can('Admr')
+        @can('Adm')
             <p>Administrador</p>
         @endcan
 

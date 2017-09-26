@@ -11,14 +11,13 @@ Route::group(['as' => 'site.'], function () {
 /********************
 | Rotas da área Admin
 *********************/
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth'/*,'can:pg-admin'*/] ], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth','can:pg-admin'] ], function () {
     ### Links ###
     Route::get('',['as'=>'home','uses'=>'Admin\DashboardController@index']);
-
     /********************
     | Rotas Usuário
     *********************/
-Route::group(['as' => 'user.'/*, 'middleware' => ['can:admin-usuario']*/ ], function () {
+    Route::group(['as' => 'user.', 'middleware' => ['can:admin-usuario'] ], function () {
         ### Links ###
         Route::get('/user',['as'=>'list', 'uses'=>'Admin\UserController@index']);
         Route::get('/user/edit/{id}',['as'=>'edit', 'uses'=>'Admin\UserController@edit']);
@@ -29,7 +28,7 @@ Route::group(['as' => 'user.'/*, 'middleware' => ['can:admin-usuario']*/ ], func
     /********************
     | Rotas ACL
     *********************/
-Route::group(['as' => 'acl.'/*, 'middleware' => ['can:admin-acl'] */], function () {
+    Route::group(['as' => 'acl.', 'middleware' => ['can:admin-acl']], function () {
         ### Links ###
         Route::get('/acl/roles/list',['as'=>'roles-list', 'uses'=>'Admin\AclController@listRoles']);
         Route::get('/acl/permissions/list',['as'=>'permissions-list', 'uses'=>'Admin\AclController@listPermissions']);
@@ -57,11 +56,3 @@ Auth::routes();
 Route::get('/login',['as'=>'login','uses'=>'Auth\LoginController@showLoginForm']);
 Route::get('/logout',['as'=>'logout','uses'=>'Auth\LoginController@logout']);
 Route::get('/cadastre-se',['as'=>'cadastre-se','uses'=>'Auth\RegisterController@showRegistrationForm']);
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

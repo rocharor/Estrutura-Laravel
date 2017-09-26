@@ -5,7 +5,7 @@
                 <img src="/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>XXXX</p>
+                <p>{{ Auth::user()->name}}</p>
                 <a href="{{ Route('site.home') }}"><b>Ir para o site</b></a>
             </div>
         </div>
@@ -13,13 +13,13 @@
         <ul class="sidebar-menu">
             <li class="header">MENU DE NAVEGAÇÃO</li>
 
-            {{-- @can('admin-usuario') --}}
+            @can('admin-usuario')
                 <li>
                     <a href="{{ Route('admin.user.list') }}"><i class="fa fa-users"></i> <span>Usuários</span></a>
                 </li>
-            {{-- @endcan --}}
+            @endcan
 
-            {{-- @can('admin-acl') --}}
+            @can('admin-acl')
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-unlock-alt"></i>
@@ -32,7 +32,7 @@
                         <li><a href="{{ Route('admin.acl.role-permissions-list') }}"><i class="fa fa-circle-o"></i>Roles - Permission</a></li>
                     </ul>
                 </li>
-            {{-- @endcan --}}
+            @endcan
         </ul>
     </section>
 </aside>

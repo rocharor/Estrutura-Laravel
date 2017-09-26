@@ -59,6 +59,7 @@ class AclController extends Controller
 
     public function updateRole(Request $request)
     {
+        die('aki');
         $role = $this->modelRole->find($request->id);
 
         $role->name = $request->nome;
@@ -206,11 +207,11 @@ class AclController extends Controller
                 }
             }
 
-            return redirect()->route('admin.user-edit', $request->user_id)->with('sucesso','Dados salvos com sucesso.');
+            return redirect()->route('admin.user.edit', $request->user_id)->with('sucesso','Dados salvos com sucesso.');
 
         } catch (Exception $e) {
 
-            return redirect()->route('admin.user-edit', $request->user_id)->with('erro','Erro ao salvar.');
+            return redirect()->route('admin.user.edit', $request->user_id)->with('erro','Erro ao salvar.');
         }
     }
 
