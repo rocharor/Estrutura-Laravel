@@ -8,57 +8,53 @@ use File;
 
 trait UploadImagem
 {
-    public $pathPerfil = 'imagens/cadastro/';
-    public $pathProduto = 'imagens/produtos/200x200/';
-    public $pathProdutoGG = 'imagens/produtos/900x900/';
+    public $path = 'image/';
     public $w = 0;
     public $h = 0;
     public $x = 0;
     public $y = 0;
-    public $extencoesImagem = [
-        'jpeg',
-        'jpg',
-        'png'
-    ];
 
-    public function imagemPerfil($file)
+    public function put($file)
     {
-        if ($this->validaExtImagem($file->extension())){
-            $fileName  = time() . '_' . $file->hashName();
-            $path = public_path($this->pathPerfil . $fileName);
-            $retorno = Image::make($file->getRealPath())->crop($this->w, $this->h, $this->x, $this->y)->save($path);
+        $fileName = $fileName  = time() . '_' . $file->hashName();
+        $path = public_path($this->path . $fileName);
+        $retorno = Image::make($file->getRealPath())->save($path);
 
-            if ($retorno) {
-                return $fileName;
-            }
+        if ($retorno) {
+            return $fileName;
         }
+
         return false;
     }
 
-    public function imagemProduto($file)
+    public function putResize($file,$w,$h)
     {
-        if ($this->validaExtImagem($file->extension())){
-            $fileName  = time() . '_' . $file->hashName();
+        $fileName = $fileName  = time() . '_' . $file->hashName();
+        $path = public_path($this->path . $fileName);
+        $retorno = Image::make($file->getRealPath())->resize($w, $h)->save($path);
 
-            $path = public_path($this->pathProduto . $fileName);
-            $pathGG = public_path($this->pathProdutoGG . $fileName);
-
-            // $this->recortar($file->getRealPath(),$path);
-            // $this->recortar($file->getRealPath(),$pathGG);
-            $retorno = Image::make($file->getRealPath())->resize(900, 900)->save($pathGG);
-            $retornoGG = Image::make($file->getRealPath())->resize(200, 200)->save($path);
-
-            if ($retorno && $retornoGG) {
-                return $fileName;
-            }
+        if ($retorno) {
+            return $fileName;
         }
+
         return false;
     }
 
-    // private function recortar($pathOrigem, $pathDestino)
-    // {
-        // Image::make($pathOrigem)->resize(200, 200)->save($pathDestino);
-    // }
+    public function putCrop($file,$w,$h,$x,$y)
+    {
+        $fileName = $fileName  = time() . '_' . $file->hashName();
+        $path = public_path($this->path . $fileName);
+        $retorno = Image::make($file->getRealPath())->crop($w, $h, $x, $y)->save($path);
+
+        if ($retorno) {
+            return $fileName;
+        }
+
+        return false;
+    }
+
+
+
 
     public function validaExtImagem($extensao){
         return  in_array(strtolower($extensao), $this->extencoesImagem);

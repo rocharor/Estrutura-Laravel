@@ -5,6 +5,10 @@
 *********************/
 Route::group(['as' => 'site.'], function () {
     Route::get('/',['as'=>'home', 'uses'=>'Site\SiteController@index']);
+
+    Route::post('/uploadImagem',['as'=>'upload-imagem', 'uses'=>'Site\SiteController@uploadImagem']);
+    Route::post('/uploadResize',['as'=>'upload-resize', 'uses'=>'Site\SiteController@uploadResize']);
+    Route::post('/uploadCrop',['as'=>'upload-crop', 'uses'=>'Site\SiteController@uploadCrop']);
 });
 
 
