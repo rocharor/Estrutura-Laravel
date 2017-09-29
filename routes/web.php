@@ -5,7 +5,9 @@
 *********************/
 Route::group(['as' => 'site.'], function () {
     Route::get('/',['as'=>'home', 'uses'=>'Site\SiteController@index']);
+    Route::get('/pdf',['as'=>'pdf', 'uses'=>'Site\SiteController@geraPdf']);
 
+    Route::post('/upload',['as'=>'upload', 'uses'=>'Site\SiteController@upload']);
     Route::post('/uploadImagem',['as'=>'upload-imagem', 'uses'=>'Site\SiteController@uploadImagem']);
     Route::post('/uploadResize',['as'=>'upload-resize', 'uses'=>'Site\SiteController@uploadResize']);
     Route::post('/uploadCrop',['as'=>'upload-crop', 'uses'=>'Site\SiteController@uploadCrop']);

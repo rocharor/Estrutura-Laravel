@@ -27,17 +27,18 @@
     @can('user')
         <p>Usuario</p>
     @endcan
-
+<img src="/storage/image/" alt="">
+<img src="/storage/doc/" alt="">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4>Upload</h4>
         </div>
         <div class="panel-body">
             <fieldset>
-                <legend>Upload Documento</legend>
+                <legend>Upload Documento Storage</legend>
                 <form action="{{Route('site.upload')}}" method="post" enctype="multipart/form-data" name='form1'>
                     {{ csrf_field() }}
-                    <input type="file" name="imagem" >
+                    <input type="file" name="arquivo" >
                     <br>
                     <input type="submit" name="btn" value="Enviar">
                 </form>
@@ -47,7 +48,7 @@
 
             <fieldset>
                 <legend>Upload Imagem Comum</legend>
-                <form action="{{Route('site.upload-imagem')}}" method="post" enctype="multipart/form-data" name='form1'>
+                <form action="{{Route('site.upload-imagem')}}" method="post" enctype="multipart/form-data" name='form2'>
                     {{ csrf_field() }}
                     <input type="file" name="imagem" >
                     <br>
@@ -59,7 +60,7 @@
 
             <fieldset>
                 <legend>Upload Imagem Resize</legend>
-                <form action="{{Route('site.upload-resize')}}" method="post" enctype="multipart/form-data" name='form2'>
+                <form action="{{Route('site.upload-resize')}}" method="post" enctype="multipart/form-data" name='form3'>
                     {{ csrf_field() }}
                     <label>W</label><input type="text" name="w"><br>
                     <label>H</label><input type="text" name="h"><br>
@@ -73,7 +74,7 @@
 
             <fieldset>
                 <legend>Upload Imagens Crop</legend>
-                <form action="{{Route('site.upload-crop')}}" method="post" enctype="multipart/form-data" name='form2'>
+                <form action="{{Route('site.upload-crop')}}" method="post" enctype="multipart/form-data" name='form4'>
                     {{ csrf_field() }}
                     <input type="hidden" name="x" id="x">
                     <input type="hidden" name="y" id="y">
@@ -82,14 +83,14 @@
 
                     <input type="file" id='select_image' name='imagem'>
                     <br>
-                    <input type="submit" name="btn" value="Enviar">
+                    {{-- <input type="submit" name="btn" value="Enviar"> --}}
 
                     <div class="div_visualizacao hide">
                         <div id="div_imagem_alteracao">{{-- IMAGEM GRANDE --}}</div>
                         <div class="preview">{{-- IMAGEM PREVIEW --}}</div>
                         <br>
                         <input type="submit" class='btn btn-success' value="Recortar Imagem">
-                        <input type='button' class="btn btn-danger" value='Cancelar'>
+                        <input type='button' class="btn btn-danger act-cancelar" value='Cancelar'>
                     </div>
                 </form>
             </fieldset>
@@ -104,7 +105,7 @@
             <fieldset>
                 <legend>Gerar PDF</legend>
 
-                <button type="button" name="button">Gerar PDF</button>
+                <a href='{{Route('site.pdf')}}' class='btn btn-primary' name="pdf" target="_blank">Gerar PDF</a>
             </fieldset>
         </div>
     </div>
@@ -117,6 +118,12 @@
             e.preventDefault();
             var $file = $(this)[0];
             self.altera_imagem_perfil($file);
+        });
+
+        $('.act-cancelar').on('click', function(e){
+            e.preventDefault();
+            $('.div_visualizacao').addClass('hide');
+            $(".div_imagem").removeClass('hide');
         });
 
         function altera_imagem_perfil($file){

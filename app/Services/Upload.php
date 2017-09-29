@@ -6,17 +6,29 @@ use Illuminate\Http\Request;
 use Image;
 use File;
 
-trait UploadImagem
+trait Upload
 {
-    public $path = 'image/';
-    public $w = 0;
-    public $h = 0;
-    public $x = 0;
-    public $y = 0;
+    private $path = 'images/';
+    private $pathStorageDoc = 'storage/documentos/';
 
-    public function put($file)
+    public function put($file, $name=false)
     {
-        $fileName = $fileName  = time() . '_' . $file->hashName();
+        $fileName = $this->createName($file, $name);
+
+        $path = public_path($this->pathStorageDoc);
+        $retorno = $file->move($path, $fileName);
+
+        if ($retorno) {
+            return $fileName;
+        }
+
+        return false;
+    }
+
+    public function putImagem($file, $name=false)
+    {
+        $fileName = $this->createName($file, $name);
+
         $path = public_path($this->path . $fileName);
         $retorno = Image::make($file->getRealPath())->save($path);
 
@@ -27,9 +39,10 @@ trait UploadImagem
         return false;
     }
 
-    public function putResize($file,$w,$h)
+    public function putResize($file, $w, $h, $name=false)
     {
-        $fileName = $fileName  = time() . '_' . $file->hashName();
+        $fileName = $this->createName($file, $name);
+
         $path = public_path($this->path . $fileName);
         $retorno = Image::make($file->getRealPath())->resize($w, $h)->save($path);
 
@@ -40,9 +53,10 @@ trait UploadImagem
         return false;
     }
 
-    public function putCrop($file,$w,$h,$x,$y)
+    public function putCrop($file, $w, $h, $x, $y, $name=false)
     {
-        $fileName = $fileName  = time() . '_' . $file->hashName();
+        $fileName = $this->createName($file, $name);
+
         $path = public_path($this->path . $fileName);
         $retorno = Image::make($file->getRealPath())->crop($w, $h, $x, $y)->save($path);
 
@@ -53,9 +67,25 @@ trait UploadImagem
         return false;
     }
 
+    /**
+     * Cria o nome do arquivo
+     * @param  [type] $file [Arquivo file]
+     * @param  [type] $name [Nome do arquivo (não obrigatório)]
+     * @return [type]       [Nome do arquivo com sua extensão]
+     */
+    public function createName($file, $name)
+    {
+        if ($name){
+            $fileName = $name . '.' . $file->extension();
+        }
+        else{
+            $fileName  = time() . '_' . $file->hashName();
+        }
 
+        return $fileName;
+    }
 
-
+/*
     public function validaExtImagem($extensao){
         return  in_array(strtolower($extensao), $this->extencoesImagem);
     }
@@ -84,5 +114,5 @@ trait UploadImagem
 
         return File::delete($fileName);
     }
-
+*/
 }
