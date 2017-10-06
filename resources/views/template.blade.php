@@ -34,7 +34,7 @@
 	    @if (session('erro')) <script>alertaPagina('{{ session('erro') }}', 'danger');</script> @endif
 
         <div>
-        	@include('topo')
+        	@include('top')
         </div>
 
         <div class="container" style="border:solid 0px;">
@@ -44,7 +44,7 @@
 		<br /><br />
 
         <div style="position:static; bottom:0px; border:solid 1px; width:100%; text-align:center;">
-        	@include('rodape')
+        	@include('footer')
         </div>
     </body>
 </html>

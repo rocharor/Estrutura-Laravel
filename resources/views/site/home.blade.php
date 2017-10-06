@@ -27,8 +27,6 @@
     @can('user')
         <p>Usuario</p>
     @endcan
-<img src="/storage/image/" alt="">
-<img src="/storage/doc/" alt="">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4>Upload</h4>
